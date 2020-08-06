@@ -1,0 +1,13 @@
+class Solution:
+    def rob(self, root: TreeNode) -> int:
+        a = self.helper(root)
+        return max(a[0], a[1])
+
+    def helper(self, root):
+        if not root:
+            return [0, 0]
+        left = self.helper(root.left)
+        right = self.helper(root.right)
+        val1 = left[1] + right[1] + root.val
+        val2 = max(left[0], left[1]) + max(right[0], right[1])
+        return [val1, val2]
